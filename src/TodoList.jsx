@@ -10,7 +10,6 @@ export default function TodoList() {
     { id: 3, title: 'קניות לשבת', isDone: false },
   ]);
 
-  // פונקציה להוספת משימה שמועברת לבן
   const handleAddTodo = (newTitle) => {
     const newTodo = {
       id: Date.now(),
@@ -20,11 +19,23 @@ export default function TodoList() {
     setTodos([...todos, newTodo]);
   };
 
+  // פונקציה לעדכון ביצוע משימה
+  const handleCompleteTodo = (id) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        // יצירת עותק חדש של האובייקט עם הסטטוס המעודכן
+        return { ...todo, isDone: true };
+      }
+      return todo;
+    });
+
+    setTodos(updatedTodos);
+  };
+
   return (
     <div style={{ maxWidth: '400px', margin: '20px auto', fontFamily: 'Arial, sans-serif' }}>
       <h2>רשימת משימות</h2>
 
-      {/* טופס ההוספה מקבל את הפונקציה כ-prop */}
       <TodoForm onAdd={handleAddTodo} />
 
       <div>
@@ -34,6 +45,7 @@ export default function TodoList() {
             id={todo.id}
             title={todo.title}
             isDone={todo.isDone}
+            onComplete={handleCompleteTodo}
           />
         ))}
       </div>
