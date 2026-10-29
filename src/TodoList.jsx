@@ -1,3 +1,5 @@
+// src/TodoList.jsx
+import TodoItem from './TodoItem';
 
 export default function TodoList() {
   const initialTodos = [
@@ -7,13 +9,18 @@ export default function TodoList() {
   ];
 
   return (
-    <div>
+    <div style={{ maxWidth: '400px', margin: '20px auto', fontFamily: 'Arial, sans-serif' }}>
       <h2>רשימת משימות</h2>
-      <ul>
+      <div>
         {initialTodos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
+          <TodoItem
+            key={todo.id}
+            id={todo.id}
+            title={todo.title}
+            isDone={todo.isDone}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
